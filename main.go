@@ -9,20 +9,33 @@ import (
 func main(){
 	fmt.Println("poopoo connected");
 
-	myHash := NewHashMap(5);
+	mapSize := 5;
+	myHash := NewHashMap(mapSize);
 
 	scanner := bufio.NewScanner(os.Stdin)
+	
 
-	// Prompt the user to enter their name
-	fmt.Print("Enter key,value:")
+	x:=0;
+	for{
+		if(x >= mapSize){
+			break;
+		}
 
-	// Read the input from the command line
-	scanner.Scan()
-	name := scanner.Text()
+		fmt.Print("Enter key:")
+		scanner.Scan()
+		key := scanner.Text()
+		fmt.Print("Enter value:")
+		scanner.Scan()
+		value := scanner.Text()
 
-	myHash.put(1,name);
+		fmt.Println(key,value);
+		myHash.put(key,value);
+		x+=1;
+		fmt.Println(x)
+	}
 
-	fmt.Println("",myHash.getAll());
+	myHash.getAll()
+	// fmt.Println("map:",myHash.getAll());
 
 	// myHash.put(1,10)
 	// myHash.put(2,20)
