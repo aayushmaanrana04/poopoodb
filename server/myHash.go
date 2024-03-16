@@ -40,10 +40,15 @@ func (hashMap *HashMap) put(key string,value string){
 // 	return -1
 // }
 
-func (hashMap HashMap) getAll(){
+func (hashMap HashMap) getAll() string{
+    result:=""
 	for i := 0; i < hashMap.size; i++ {
-		hashMap.Bucket[i].PrintLL()	
+        result+="["
+		result += myHash.Bucket[i].PrintLL()
+        result+="]"
+        result += "\n"
 	}
+    return result;
 }
 
 //linked list
@@ -59,28 +64,41 @@ type LinkedList struct{
 
 func (l *LinkedList) Append(key string,value string) {
     newNode := &Node{key:key,value: value}
-
     // If the list is empty, set the new node as the head
     if l.head == nil {
         l.head = newNode
         return
     }
-
     // Traverse the list to find the last node
     current := l.head
-    for current.next != nil {
+    for current != nil {
+        if(current.key == key){
+            current.value = value;
+            return;
+        }
+        if(current.next == nil){
+            current.next = newNode;
+            return;
+        }
         current = current.next
     }
 
     // Append the new node to the end of the list
-    current.next = newNode
+    
 }
 
-func (l *LinkedList) PrintLL() {
+func (l *LinkedList) PrintLL() string {
+    // current := l.head
+    // for current != nil {
+    //     fmt.Print(" => {",current.key,",",current.value,"}")
+    //     current = current.next
+    // }
+
     current := l.head
+    result := "";
     for current != nil {
-        fmt.Println("ll=>","{",current.key,",",current.value,"}")
+        result += "=> {" + current.key + "," + current.value + "}"
         current = current.next
     }
-    fmt.Println("nil")
+    return result;
 }
