@@ -32,13 +32,14 @@ func (hashMap *HashMap) put(key string,value string){
 	hashMap.Bucket[index].Append(key,value); 
 }
 
-// func (hashMap HashMap) get(key string) any{
-// 	index := hashMap.hash(key)
-// 	if(hashMap.Bucket[index]!=nil){
-// 		return hashMap.Bucket[hashMap.hash(key)];
-// 	}
-// 	return -1
-// }
+func (hashMap HashMap) Get(key string) string{
+	index := hashMap.hash(key)
+    fmt.Println("key:",key)
+    if(hashMap.Bucket[index].Get(key)!=""){
+        return hashMap.Bucket[index].Get(key);
+    }
+    return "No such Key exists!"
+}
 
 func (hashMap HashMap) getAll() string{
     result:=""
@@ -101,4 +102,16 @@ func (l *LinkedList) PrintLL() string {
         current = current.next
     }
     return result;
+}
+
+func (l *LinkedList) Get(key string) string{
+    current :=l.head
+
+    for current !=nil{
+        if(current.key == key){
+            return current.value;
+        }
+        current = current.next;
+    }
+    return "";
 }
